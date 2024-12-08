@@ -92,7 +92,9 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-[Beerware](https://en.wikipedia.org/wiki/Beerware) - if you find the package useful, you can buy me a beer or a coffee 🍺
+I would say it's [Beerware license](https://en.wikipedia.org/wiki/Beerware) - if you find the package useful, you can buy me a beer or 
+a coffee 🍺... but unfortunately it says on the pub.dev that *No license was recognized* so let's
+say it is [MIT License](https://en.wikipedia.org/wiki/MIT_License) 🥸.
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/lorien.dev)
 

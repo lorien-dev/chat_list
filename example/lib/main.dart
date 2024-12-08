@@ -15,7 +15,8 @@ class LorienChatListExample extends StatefulWidget {
 }
 
 class _LorienChatListExampleState extends State<LorienChatListExample> {
-  late final ChatListController<_MessageModel> _chatController = ChatListController<_MessageModel>(
+  late final ChatListController<_MessageModel> _chatController =
+      ChatListController<_MessageModel>(
     initialItems: List<int>.generate(10, (index) => -index)
         .map(
           (number) => _MessageModel(
@@ -71,7 +72,8 @@ class _LorienChatListExampleState extends State<LorienChatListExample> {
                 _MessageModel(
                   number: _nextBottomNumber++,
                   isMyMessage: _random.nextBool(),
-                  text: _tolkienQuotes[_nextBottomNumber % _tolkienQuotes.length],
+                  text:
+                      _tolkienQuotes[_nextBottomNumber % _tolkienQuotes.length],
                 ),
               ),
             ),
@@ -92,7 +94,9 @@ class _LorienChatListExampleState extends State<LorienChatListExample> {
         body: ChatList(
           controller: _chatController,
           itemBuilder: (item, properties) => _MessageCard(
-            type: item.isMyMessage ? _MessageType.outgoing : _MessageType.incoming,
+            type: item.isMyMessage
+                ? _MessageType.outgoing
+                : _MessageType.incoming,
             text: '${item.number}. ${item.text}',
           ),
           loadingMoreWidget: const Padding(
@@ -160,7 +164,8 @@ class _MessageCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isIncoming = _type == _MessageType.incoming;
     return Row(
-      mainAxisAlignment: isIncoming ? MainAxisAlignment.start : MainAxisAlignment.end,
+      mainAxisAlignment:
+          isIncoming ? MainAxisAlignment.start : MainAxisAlignment.end,
       children: [
         Flexible(
           child: ConstrainedBox(

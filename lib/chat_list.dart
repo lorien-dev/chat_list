@@ -11,7 +11,8 @@ class ChatList<T> extends StatefulWidget {
   const ChatList({
     super.key,
     required ChatListController<T> controller,
-    required Widget Function(T item, ChatListItemProperties itemProperties) itemBuilder,
+    required Widget Function(T item, ChatListItemProperties itemProperties)
+        itemBuilder,
     Widget? loadingMoreWidget,
     FutureOr<bool> Function()? onLoadMoreCallback,
     ScrollController? scrollController,
@@ -98,10 +99,13 @@ class _ChatListState<T> extends State<ChatList<T>> {
   List<T> _oldItems = [];
   List<T> _newItems = [];
 
-  bool get _isAtTop => _scrollController.position.pixels == _scrollController.position.maxScrollExtent;
+  bool get _isAtTop =>
+      _scrollController.position.pixels ==
+      _scrollController.position.maxScrollExtent;
 
   bool get _isAtBottom =>
-      _scrollController.position.pixels <= _scrollController.position.minScrollExtent + widget._bottomEdgeThreshold;
+      _scrollController.position.pixels <=
+      _scrollController.position.minScrollExtent + widget._bottomEdgeThreshold;
 
   @override
   void initState() {
@@ -115,8 +119,8 @@ class _ChatListState<T> extends State<ChatList<T>> {
     _scrollController = widget._scrollController ?? ScrollController();
     _scrollController.addListener(_scrollListener);
 
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => _scrollController.jumpTo(_scrollController.position.minScrollExtent));
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        _scrollController.jumpTo(_scrollController.position.minScrollExtent));
   }
 
   @override
@@ -229,7 +233,8 @@ class _ChatListState<T> extends State<ChatList<T>> {
     if (_isAtTop) {
       _loadMore();
     }
-    if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+    if (_scrollController.position.userScrollDirection ==
+        ScrollDirection.reverse) {
       _clearQueue();
     }
   }
@@ -246,7 +251,8 @@ class _ChatListState<T> extends State<ChatList<T>> {
     }
   }
 
-  void _animateToMaxScrollExtent() => WidgetsBinding.instance.addPostFrameCallback(
+  void _animateToMaxScrollExtent() =>
+      WidgetsBinding.instance.addPostFrameCallback(
         (_) => _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
           duration: const Duration(milliseconds: 100),
@@ -271,7 +277,8 @@ class _ChatListState<T> extends State<ChatList<T>> {
       (_) async {
         while (_animationQueue.isNotEmpty) {
           if (widget._useJumpTo) {
-            _scrollController.jumpTo(_scrollController.position.minScrollExtent);
+            _scrollController
+                .jumpTo(_scrollController.position.minScrollExtent);
           } else {
             _scrollController.animateTo(
               _scrollController.position.minScrollExtent,

@@ -1,5 +1,8 @@
 name: lorien_chat_list
-description: "LORIEN.DEV Chat list."
+description: >
+  Flutter plugin for creating chat list page which will automatically 
+  scroll or maintain current scroll position.
+
 version: 0.0.1
 repository: https://github.com/lorien-dev/chat_list
 

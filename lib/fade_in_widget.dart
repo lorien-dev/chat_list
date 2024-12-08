@@ -21,7 +21,8 @@ class FadeInWidget extends StatefulWidget {
   State<FadeInWidget> createState() => _FadeInWidgetState();
 }
 
-class _FadeInWidgetState extends State<FadeInWidget> with SingleTickerProviderStateMixin {
+class _FadeInWidgetState extends State<FadeInWidget>
+    with SingleTickerProviderStateMixin {
   AnimationController? _controller;
   Animation<double>? _animation;
 
