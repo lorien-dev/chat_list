@@ -1,7 +1,7 @@
 name: lorien_chat_list
 description: "LORIEN.DEV Chat list."
 version: 0.0.1
-homepage:
+homepage: https://github.com/lorien-dev/chat_list
 
 environment:
   sdk: ^3.5.4
