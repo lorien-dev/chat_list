@@ -52,10 +52,10 @@ _controller.clearAll();
 ### Widget
 ```dart
 ChatList(
-controller: _controller,
-itemBuilder: (item, properties) => Text(
-'${item.toString()} - ${properties.toString()}',
-),
+  controller: _controller,
+  itemBuilder: (item, properties) => Text(
+    '${item.toString()} - ${properties.toString()}',
+  ),
 ),
 ```
 
