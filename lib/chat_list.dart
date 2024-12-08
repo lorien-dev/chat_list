@@ -39,19 +39,47 @@ class ChatList<T> extends StatefulWidget {
         _fadeInCurve = fadeInCurve,
         _bottomEdgeThreshold = bottomEdgeThreshold;
 
+  /// ChatListController
   final ChatListController<T> _controller;
+
+  /// ItemBuilder
   final Widget Function(T, ChatListItemProperties) _itemBuilder;
+
+  /// Widget that is visible at the top of the list while loading more old items (*onLoadMoreCallback*)
   final Widget? _loadingMoreWidget;
+
+  /// function called to load more old items. Triggered while reached top edge of the list. Should return bool -
+  /// *true* if there are more old messages to load, otherwise *false* if everything is loaded.
   final FutureOr<bool> Function()? _onLoadMoreCallback;
+
+  /// ScrollController
   final ScrollController? _scrollController;
+
+  /// ScrollPhysics
   final ScrollPhysics? _scrollPhysics;
+
+  /// List padding
   final EdgeInsets? _padding;
+
+  /// Vertical spacing between items
   final double _spacing;
+
+  /// Whether to use jumpTo instead of animateTo in automatic scrolling
   final bool _useJumpTo;
+
+  /// AnimateTo duration
   final Duration _animateToDuration;
+
+  /// Fade in duration
   final Duration _fadeInDuration;
+
+  /// AnimateTo curve, defaults to *Curves.easeInOut*
   final Curve _animateToCurve;
+
+  /// Fade in curve, defaults to *Curves.easeInOut*
   final Curve _fadeInCurve;
+
+  /// Threshold for automatic scrolling to a new bottom items, defaults to 0
   final double _bottomEdgeThreshold;
 
   @override

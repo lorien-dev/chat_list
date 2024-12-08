@@ -1,39 +1,96 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# lorien_chat_list
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+**lorien_chat_list** is a package to help build chat pages like *Messenger* or *WhatsUp*. The main difference with other packages is the scrolling part - it will scroll automatically on a new message or preserve the current scroll position if the user scrolled up in the list (you can set the treshold for that).
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## Getting Started
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Add the dependency in `pubspec.yaml`:
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  ...
+  lorien_chat_list:: ^0.0.1
 ```
 
-## Additional information
+## Basic Usage
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+### Import
+```dart
+import 'package:lorien_chat_list/lorien_chat_list.dart';
+```
+
+### Controller
+```dart
+final ChatListController<int> _controller = ChatListController(initialItems: List<int>.generate(10, (index) => index));
+```
+
+Adding an item to the bottom of the list.
+```dart
+_controller.addToBottom(100);
+```
+
+Adding a range of items to the bottom of the list.
+```dart
+_controller.addRangeToBottom([100, 200]);
+```
+
+Adding an item to the top of the list.
+```dart
+_controller.addToTop(-100);
+```
+
+Adding a range of items to the top of the list.
+```dart
+_controller.addRangeToTop([-100, -200]);
+```
+
+Clearing all items and resetting the controller to its initial state.
+```dart
+_controller.clearAll();
+```
+
+### Widget
+```dart
+ChatList(
+controller: _controller,
+itemBuilder: (item, properties) => Text(
+'${item.toString()} - ${properties.toString()}',
+),
+),
+```
+
+For a more complex usage please see the [example](https://github.com/lorien-dev/chat_list/tree/master/example).
+
+## Customization (optional)
+
+### ChatList
+- `loadingMoreWidget` - widget that is visible at the top of the list while loading more old items (*onLoadMoreCallback*)
+- `onLoadMoreCallback` - function called to load more old items. Triggered while reached top edge of the list. Should return bool - *true* if there are more old messages to load, otherwise *false* if everything is loaded.
+- `scrollController` - scroll controller
+- `scrollPhysics` - scroll physics
+- `padding` - list padding
+- `spacing` - vertical spacing between items
+- `useJumpTo` - whether to use jumpTo instead of animateTo in automatic scrolling
+- `animateToDuration` - animateTo duration, defaults to 300 milliseconds
+- `fadeInDuration` - fade in duration, defaults to 300 milliseconds
+- `animateToCurve` - animateTo curve, defaults to *Curves.easeInOut*
+- `fadeInCurve` - fade in curve, defaults to *Curves.easeInOut*
+- `bottomEdgeThreshold` - threshold for automatic scrolling to a new bottom items, defaults to 0
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## Author
+
+- [Michał Lot LORIEN.DEV](https://github.com/lorien-dev)
+
+## License
+
+[Beerware](https://en.wikipedia.org/wiki/Beerware) - if you find the package useful, you can buy me a beer or a coffee 🍺
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoffee.com/lorien.dev)
+
