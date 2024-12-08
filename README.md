@@ -2,7 +2,7 @@
 
 **lorien_chat_list** is a package to help build chat pages like *Messenger* or *WhatsUp*. The main difference with other packages is the scrolling part - it will scroll automatically on a new message or preserve the current scroll position if the user scrolled up in the list (you can set the treshold for that).
 
-!["Example gif"](https://lorien.dev/chat_list/lorien_dev_chat_list_demo_short.gif)
+![lorien_dev_chat_list_demo_short](https://github.com/user-attachments/assets/4b5e9dd8-f6a6-4293-8053-288a0e989940)
 
 ## Getting Started
 
