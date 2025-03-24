@@ -95,6 +95,7 @@ class _ChatListState<T> extends State<ChatList<T>> {
 
   bool _isLoadingMore = false;
   bool _isAnimationRunning = false;
+  bool _isScrollingToBottom = false;
 
   List<T> _oldItems = [];
   List<T> _newItems = [];
@@ -221,7 +222,11 @@ class _ChatListState<T> extends State<ChatList<T>> {
   void _controllerListener() {
     setState(() {});
 
-    if (widget._controller.lastAddedToBottom) {
+    if (widget._controller.shouldScrollToBottom) {
+      _scrollToBottom();
+    } else if (widget._controller.shouldJumpToBottom) {
+      _jumpToBottom();
+    } else if (widget._controller.lastAddedToBottom && !_isScrollingToBottom) {
       _queueNextAnimation();
       if (_isAtBottom) {
         _runAnimation();
@@ -294,6 +299,48 @@ class _ChatListState<T> extends State<ChatList<T>> {
         _isAnimationRunning = false;
       },
     );
+  }
+
+  Future<void> _scrollToBottom() async {
+    if (_isScrollingToBottom) {
+      return;
+    }
+    _isScrollingToBottom = true;
+    _isAnimationRunning = false;
+    _clearQueue();
+
+    double lastMinScrollExtent;
+    const duration = Duration(milliseconds: 500);
+
+    do {
+      lastMinScrollExtent = _scrollController.position.minScrollExtent;
+      await _scrollController.animateTo(
+        lastMinScrollExtent,
+        duration: duration,
+        curve: Curves.linear,
+      );
+    } while (lastMinScrollExtent != _scrollController.position.minScrollExtent);
+
+    _isScrollingToBottom = false;
+  }
+
+  Future<void> _jumpToBottom() async {
+    if (_isScrollingToBottom) {
+      return;
+    }
+    _isScrollingToBottom = true;
+    _isAnimationRunning = false;
+    _clearQueue();
+
+    double lastMinScrollExtent;
+
+    do {
+      lastMinScrollExtent = _scrollController.position.minScrollExtent;
+      _scrollController.jumpTo(lastMinScrollExtent);
+      await Future.delayed(const Duration(milliseconds: 10));
+    } while (lastMinScrollExtent != _scrollController.position.minScrollExtent);
+
+    _isScrollingToBottom = false;
   }
 
   @override

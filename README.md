@@ -11,7 +11,7 @@ Add the dependency in `pubspec.yaml`:
 ```yaml
 dependencies:
   ...
-  lorien_chat_list:: ^0.0.1
+  lorien_chat_list:: ^0.0.2
 ```
 
 ## Basic Usage

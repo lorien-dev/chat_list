@@ -27,11 +27,19 @@ class ChatListController<T> extends ChangeNotifier {
 
   bool get didLoadAll => _didLoadAll;
 
+  bool get shouldScrollToBottom => _shouldScrollToBottom;
+
+  bool get shouldJumpToBottom => _shouldJumpToBottom;
+
+  int get itemsCount => _oldItems.length + _newItems.length;
+
   final List<T> _oldItems;
   final List<T> _newItems;
 
   bool _lastAddedToBottom = false;
   bool _didLoadAll = false;
+  bool _shouldScrollToBottom = false;
+  bool _shouldJumpToBottom = false;
 
   /// Adds an item to the bottom of the list.
   void addToBottom(T item) {
@@ -64,6 +72,20 @@ class ChatListController<T> extends ChangeNotifier {
   /// Sets the value of [_didLoadAll]. If set to *true*, the load more callback will not be called anymore.
   /// This is used automatically and should not be called manually unless for specific use cases.
   void setDidLoadAll(bool value) => _didLoadAll = value;
+
+  /// Scrolls to the bottom of the list. (Experimental feature - no smooth animation)
+  void scrollToBottom() {
+    _shouldScrollToBottom = true;
+    notifyListeners();
+    _shouldScrollToBottom = false;
+  }
+
+  /// Jumps to the bottom of the list. (Experimental feature - not in a single jump)
+  void jumpToBottom() {
+    _shouldJumpToBottom = true;
+    notifyListeners();
+    _shouldJumpToBottom = false;
+  }
 
   /// Clears all items and resets the controller to its initial state.
   void clearAll() {
