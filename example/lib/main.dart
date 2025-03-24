@@ -37,6 +37,7 @@ class _LorienChatListExampleState extends State<LorienChatListExample> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey[200],
         appBar: AppBar(
@@ -76,6 +77,22 @@ class _LorienChatListExampleState extends State<LorienChatListExample> {
                       _tolkienQuotes[_nextBottomNumber % _tolkienQuotes.length],
                 ),
               ),
+            ),
+            IconButton(
+              tooltip: 'Scroll to bottom',
+              icon: const Icon(
+                Icons.keyboard_arrow_down,
+                color: Colors.white,
+              ),
+              onPressed: () => _chatController.scrollToBottom(),
+            ),
+            IconButton(
+              tooltip: 'Jump to bottom',
+              icon: const Icon(
+                Icons.keyboard_double_arrow_down_outlined,
+                color: Colors.white,
+              ),
+              onPressed: () => _chatController.jumpToBottom(),
             ),
             IconButton(
               tooltip: 'Clear list',
