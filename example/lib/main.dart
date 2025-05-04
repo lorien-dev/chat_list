@@ -30,6 +30,7 @@ class _LorienChatListExampleState extends State<LorienChatListExample> {
 
   int _nextTopNumber = -10;
   int _nextBottomNumber = 1;
+  int _replaceNumber = 1;
 
   final _random = Random();
   final _scrollController = ScrollController();
@@ -105,6 +106,36 @@ class _LorienChatListExampleState extends State<LorienChatListExample> {
                 _nextTopNumber = 0;
                 _nextBottomNumber = 1;
               },
+            ),
+            IconButton(
+              tooltip: 'Replace item where',
+              icon: const Icon(
+                Icons.repeat_one,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                if (_chatController.oldest == null) {
+                  return;
+                }
+                _chatController.replaceFirstItemWhere(
+                  test: (item) => item.id == _chatController.oldest!.id,
+                  newItem: _chatController.oldest!
+                      .copyWith(text: 'New item with replaced text'),
+                );
+              },
+            ),
+            IconButton(
+              tooltip: 'Replace newest item',
+              icon: const Icon(
+                Icons.repeat_on,
+                color: Colors.white,
+              ),
+              onPressed: () => _chatController.replaceItem(
+                oldItem: _chatController.newest!,
+                newItem: _chatController.newest!.copyWith(
+                  text: '${_chatController.newest!.text} (${_replaceNumber++})',
+                ),
+              ),
             ),
           ],
         ),
@@ -210,15 +241,35 @@ class _MessageCard extends StatelessWidget {
 }
 
 class _MessageModel {
-  const _MessageModel({
+  _MessageModel({
     required this.number,
     required this.isMyMessage,
     required this.text,
-  });
+  }) : id = UniqueKey().toString();
 
+  final String id;
   final int number;
   final bool isMyMessage;
   final String text;
+
+  _MessageModel copyWith({
+    int? number,
+    bool? isMyMessage,
+    String? text,
+  }) {
+    return _MessageModel(
+      number: number ?? this.number,
+      isMyMessage: isMyMessage ?? this.isMyMessage,
+      text: text ?? this.text,
+    );
+  }
+
+  @override
+  String toString() => 'MessageModel{'
+      'id: $id,'
+      'number: $number,'
+      'isMyMessage: $isMyMessage,'
+      'text: $text}';
 }
 
 enum _MessageType {

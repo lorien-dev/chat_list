@@ -3,7 +3,7 @@ description: >
   Flutter plugin for creating chat list page which will automatically 
   scroll or maintain current scroll position.
 
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/lorien-dev/chat_list
 
 environment:

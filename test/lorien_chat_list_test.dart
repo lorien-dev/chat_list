@@ -110,5 +110,36 @@ void main() {
       controller.addToTop(-2);
       expect(controller.oldest, -2);
     });
+
+    test('Check replace item', () {
+      const newReplacedItem = 2137;
+
+      expect(controller.newest, 0);
+      expect(controller.oldest, 9);
+
+      controller.replaceItem(
+        oldItem: controller.newest!,
+        newItem: newReplacedItem,
+      );
+      expect(controller.newest, newReplacedItem);
+
+      controller.replaceItem(
+        oldItem: controller.oldest!,
+        newItem: newReplacedItem,
+      );
+      expect(controller.oldest, newReplacedItem);
+      expect(controller.newest, newReplacedItem);
+    });
+
+    test('Check replace item', () {
+      const newReplacedItem = 2137;
+
+      expect(controller.oldItems[5], 5);
+      controller.replaceFirstItemWhere(
+        test: (item) => item == 5,
+        newItem: newReplacedItem,
+      );
+      expect(controller.oldItems[5], newReplacedItem);
+    });
   });
 }

@@ -73,6 +73,43 @@ class ChatListController<T> extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// Replaces first [oldItem] occurrence with a [newItem].
+  bool replaceItem({required T oldItem, required T newItem}) {
+    var index = _newItems.indexOf(oldItem);
+    if (index != -1) {
+      _newItems[index] = newItem;
+      notifyListeners();
+      return true;
+    }
+    index = _oldItems.indexOf(oldItem);
+    if (index != -1) {
+      _oldItems[index] = newItem;
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
+
+  /// Replaces first item that matches the [test] with a [newItem].
+  bool replaceFirstItemWhere({
+    required bool Function(T item) test,
+    required T newItem,
+  }) {
+    var index = _newItems.indexWhere(test);
+    if (index != -1) {
+      _newItems[index] = newItem;
+      notifyListeners();
+      return true;
+    }
+    index = _oldItems.indexWhere(test);
+    if (index != -1) {
+      _oldItems[index] = newItem;
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
+
   /// Sets the value of [_didLoadAll]. If set to *true*, the load more callback will not be called anymore.
   /// This is used automatically and should not be called manually unless for specific use cases.
   void setDidLoadAll(bool value) => _didLoadAll = value;
