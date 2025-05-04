@@ -76,5 +76,39 @@ void main() {
       expect(controller.didLoadAll, false);
       expect(controller.lastAddedToBottom, false);
     });
+
+    test('Check newest', () {
+      controller.clearAll();
+      expect(controller.newest, null);
+
+      controller.addToTop(0);
+      expect(controller.newest, 0);
+
+      controller.addToTop(-1);
+      expect(controller.newest, 0);
+
+      controller.addToBottom(1);
+      expect(controller.newest, 1);
+
+      controller.addToBottom(2);
+      expect(controller.newest, 2);
+    });
+
+    test('Check oldest', () {
+      controller.clearAll();
+      expect(controller.oldest, null);
+
+      controller.addToBottom(0);
+      expect(controller.oldest, 0);
+
+      controller.addToBottom(1);
+      expect(controller.oldest, 0);
+
+      controller.addToTop(-1);
+      expect(controller.oldest, -1);
+
+      controller.addToTop(-2);
+      expect(controller.oldest, -2);
+    });
   });
 }

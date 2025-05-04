@@ -33,6 +33,10 @@ class ChatListController<T> extends ChangeNotifier {
 
   int get itemsCount => _oldItems.length + _newItems.length;
 
+  T? get oldest => _oldItems.lastOrNull ?? _newItems.firstOrNull;
+
+  T? get newest => _newItems.lastOrNull ?? _oldItems.firstOrNull;
+
   final List<T> _oldItems;
   final List<T> _newItems;
 
