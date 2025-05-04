@@ -11,7 +11,7 @@ Add the dependency in `pubspec.yaml`:
 ```yaml
 dependencies:
   ...
-  lorien_chat_list:: ^0.0.2
+  lorien_chat_list:: ^0.0.3
 ```
 
 ## Basic Usage
@@ -49,6 +49,16 @@ _controller.addRangeToTop([-100, -200]);
 Clearing all items and resetting the controller to its initial state.
 ```dart
 _controller.clearAll();
+```
+
+Replacing item by new one.
+```dart
+_controller.replaceItem(oldItem: 0, newItem: 100);
+```
+
+Replacing first item where.
+```dart
+_controller.replaceFirstItemWhere(test: (item) => item == 0, newItem: 100);
 ```
 
 ### Widget
